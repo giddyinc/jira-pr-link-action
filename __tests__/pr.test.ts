@@ -9,7 +9,7 @@ let mock: PullRequestEvent
 beforeEach(() => {
   mock = JSON.parse(JSON.stringify(pr))
 
-  options = {project: 'SRENEW', ignoreAuthor: []}
+  options = {project: 'SRENEW', ignoreAuthor: [], ignoreHead: []}
 })
 
 test('invalid PR', async () => {
@@ -56,6 +56,13 @@ test('works with regex options', async () => {
 test('valid if ignoreAuthor matches', async () => {
   options.ignoreAuthor = ['dependabot[bot]']
   mock.pull_request.user.login = 'dependabot[bot]'
+
+  expect(validate(mock, options)).toEqual(true)
+})
+
+test('valid if ignoreHead matches', async () => {
+  options.ignoreHead = ['tacos', 'mainbranch']
+  mock.pull_request.head.ref = 'mainbranch';
 
   expect(validate(mock, options)).toEqual(true)
 })

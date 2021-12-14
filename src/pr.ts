@@ -10,19 +10,23 @@ import {Options} from './options'
  */
 export function validate(event: PullRequestEvent, options: Options): boolean {
   const {project} = options
-  const re = RegExp(`${project}-[0-9]+`)
+  const re = RegExp(`(${project.split(',').join('|')})-[0-9]+`, 'i')
 
-  core.info('author ' + event.pull_request.user.login.toLowerCase())
-  core.info('title ' + event.pull_request.title)
-  core.info('head ' + event.pull_request.head.ref)
+  core.info(`author ${event.pull_request.user.login.toLowerCase()}`)
+  core.info(`title ${event.pull_request.title}`)
+  core.info(`head ${event.pull_request.head.ref}`)
 
   for (const author of options.ignoreAuthor) {
-    if (event.pull_request.user.login.toLowerCase() == author.toLowerCase()) {
+    if (event.pull_request.user.login.toLowerCase() === author.toLowerCase()) {
       return true
     }
   }
 
   if (event.pull_request.title.match(re)) {
+    return true
+  }
+
+  if (event.pull_request.body.match(re)) {
     return true
   }
 

@@ -16,7 +16,7 @@ async function run(): Promise<void> {
 
     if (!valid) {
       core.setFailed(
-        'Invalid Pull Request: missing JIRA project in title or branch'
+        'Invalid Pull Request: missing Jira ticket # title, description or branch'
       )
     }
   } catch (error) {

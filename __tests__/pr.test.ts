@@ -32,6 +32,16 @@ test('valid PR description', async () => {
   expect(validate(mock, options)).toEqual(true)
 })
 
+test('valid PR with multiple projects', async () => {
+  options.project = 'SRENEW,DEVOPS,CR';
+  mock.pull_request.title =
+    'Update the README with new information'
+  mock.pull_request.body =
+    'Update the README with new information | DEVOPS-1234'
+
+  expect(validate(mock, options)).toEqual(true)
+})
+
 test('valid PR branch', async () => {
   mock.pull_request.head.ref = 'foo-SRENEW-1234'
 

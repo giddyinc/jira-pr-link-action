@@ -24,8 +24,7 @@ test('valid PR title', async () => {
 })
 
 test('valid PR description', async () => {
-  mock.pull_request.title =
-    'Update the README with new information'
+  mock.pull_request.title = 'Update the README with new information'
   mock.pull_request.body =
     'Update the README with new information | SRENEW-1234'
 
@@ -33,9 +32,8 @@ test('valid PR description', async () => {
 })
 
 test('valid PR with multiple projects', async () => {
-  options.project = 'SRENEW,DEVOPS,CR';
-  mock.pull_request.title =
-    'Update the README with new information'
+  options.project = 'SRENEW,DEVOPS,CR'
+  mock.pull_request.title = 'Update the README with new information'
   mock.pull_request.body =
     'Update the README with new information | DEVOPS-1234'
 

@@ -14,6 +14,7 @@ export function validate(event: PullRequestEvent, options: Options): boolean {
 
   core.info(`author ${event.pull_request.user.login.toLowerCase()}`)
   core.info(`title ${event.pull_request.title}`)
+  core.info(`body ${event.pull_request.body}`)
   core.info(`head ${event.pull_request.head.ref}`)
 
   for (const author of options.ignoreAuthor) {

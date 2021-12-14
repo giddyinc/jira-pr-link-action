@@ -23,6 +23,15 @@ test('valid PR title', async () => {
   expect(validate(mock, options)).toEqual(true)
 })
 
+test('valid PR description', async () => {
+  mock.pull_request.title =
+    'Update the README with new information'
+  mock.pull_request.body =
+    'Update the README with new information | SRENEW-1234'
+
+  expect(validate(mock, options)).toEqual(true)
+})
+
 test('valid PR branch', async () => {
   mock.pull_request.head.ref = 'foo-SRENEW-1234'
 

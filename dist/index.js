@@ -92,9 +92,11 @@ const core = __importStar(__nccwpck_require__(186));
 function getInput() {
     const project = core.getInput('project', { required: true });
     const ignoreAuthor = core.getInput('ignore-author').split(',');
+    const ignoreHead = core.getInput('ignore-head').split(',');
     return {
         project,
-        ignoreAuthor
+        ignoreAuthor,
+        ignoreHead
     };
 }
 exports.getInput = getInput;
@@ -142,6 +144,10 @@ function validate(event, options) {
     core.info(`title ${event.pull_request.title}`);
     core.info(`body ${event.pull_request.body}`);
     core.info(`head ${event.pull_request.head.ref}`);
+    if (options.ignoreHead &&
+        options.ignoreHead.includes(event.pull_request.head.ref)) {
+        return true;
+    }
     for (const author of options.ignoreAuthor) {
         if (event.pull_request.user.login.toLowerCase() === author.toLowerCase()) {
             return true;

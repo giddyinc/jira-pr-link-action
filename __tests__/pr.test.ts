@@ -62,7 +62,7 @@ test('valid if ignoreAuthor matches', async () => {
 
 test('valid if ignoreHead matches', async () => {
   options.ignoreHead = ['tacos', 'mainbranch']
-  mock.pull_request.head.ref = 'mainbranch';
+  mock.pull_request.head.ref = 'mainbranch'
 
   expect(validate(mock, options)).toEqual(true)
 })

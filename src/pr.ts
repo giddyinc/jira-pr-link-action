@@ -34,7 +34,7 @@ export function validate(event: PullRequestEvent, options: Options): boolean {
     return true
   }
 
-  if (event.pull_request.body.match(re)) {
+  if ((event.pull_request.body || '').match(re)) {
     return true
   }
 

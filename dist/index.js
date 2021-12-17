@@ -156,7 +156,7 @@ function validate(event, options) {
     if (event.pull_request.title.match(re)) {
         return true;
     }
-    if (event.pull_request.body.match(re)) {
+    if ((event.pull_request.body || '').match(re)) {
         return true;
     }
     if (event.pull_request.head.ref.match(re)) {

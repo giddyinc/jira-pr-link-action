@@ -8,6 +8,9 @@ inputs:
   ignore-author:
     required: false
     description: "comma seperated list of authors to skip check for"
+  ignore-head:
+    required: false
+    description: "comma seperated list of branches to skip check for"
 runs:
   using: 'node12'
   main: 'dist/index.js'

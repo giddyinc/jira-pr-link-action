@@ -1,7 +1,7 @@
 ## Usage:
 
 ```yaml
-name: JIRA Connection
+name: Jira Check
 
 on:
   pull_request:
@@ -14,12 +14,13 @@ on:
 jobs:
   enforce-issue:
     runs-on: ubuntu-latest
-    name: JIRA Association
+    name: Ensure issue number on PR title or commit
     steps:
-      - name: Check for JIRA ISSUE
+      - name: Check for Jira Issue
         id: check
-        uses: supplypike/jira-pr-link-action@v1
+        uses: giddyinc/jira-pr-link-action@main
         with:
-          ignore-author: dependabot[bot]
-          project: "SRENEW"
+          ignore-author: dependabot[bot],build-giddy
+          ignore-head: staging,development
+          project: "CR,DEVOPS,AM,API,DATA"
 ```

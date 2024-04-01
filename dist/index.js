@@ -93,10 +93,12 @@ function getInput() {
     const project = core.getInput('project', { required: true });
     const ignoreAuthor = core.getInput('ignore-author').split(',');
     const ignoreHead = core.getInput('ignore-head').split(',');
+    const ignoreTitle = core.getInput('ignore-title').split(',');
     return {
         project,
         ignoreAuthor,
-        ignoreHead
+        ignoreHead,
+        ignoreTitle
     };
 }
 exports.getInput = getInput;
@@ -150,6 +152,11 @@ function validate(event, options) {
     }
     for (const author of options.ignoreAuthor) {
         if (event.pull_request.user.login.toLowerCase() === author.toLowerCase()) {
+            return true;
+        }
+    }
+    for (const title of options.ignoreTitle) {
+        if (event.pull_request.title.toLowerCase().includes(title.toLowerCase())) {
             return true;
         }
     }

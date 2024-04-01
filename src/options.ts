@@ -17,6 +17,6 @@ export function getInput(): Options {
     project,
     ignoreAuthor,
     ignoreHead,
-    ignoreTitle,
+    ignoreTitle
   }
 }

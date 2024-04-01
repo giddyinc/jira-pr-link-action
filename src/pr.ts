@@ -30,6 +30,12 @@ export function validate(event: PullRequestEvent, options: Options): boolean {
     }
   }
 
+  for (const title of options.ignoreTitle) {
+    if (event.pull_request.title.toLowerCase().includes(title.toLowerCase())) {
+      return true
+    }
+  }
+
   if (event.pull_request.title.match(re)) {
     return true
   }
